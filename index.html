@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meenu Finds — Smart Shopping</title>
+<meta name="description" content="Meenu Finds — affordable, useful and stylish finds.">
+<style>
+:root{--ink:#191919;--muted:#6d6d6d;--bg:#fffaf7;--card:#fff;--accent:#7c3aed;--accent2:#ec4899;--line:#eee7e2}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+a{text-decoration:none;color:inherit}.top{background:#191919;color:#fff;text-align:center;padding:8px;font-size:13px}
+header{position:sticky;top:0;z-index:10;background:#ffffffee;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{max-width:1150px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:15px 20px;gap:15px}.brand{font-weight:900;font-size:23px}.brand span{color:var(--accent)}
+nav{display:flex;gap:20px;font-size:14px;font-weight:650}.actions{display:flex;gap:8px;align-items:center}.icon{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px;cursor:pointer}
+.hero{max-width:1150px;margin:24px auto;padding:28px 20px;display:grid;grid-template-columns:1.15fr .85fr;gap:25px;align-items:center}.hero h1{font-size:clamp(38px,6vw,68px);line-height:.98;margin:0 0 16px}.hero p{font-size:18px;color:var(--muted);max-width:570px}.btn{display:inline-block;border:0;border-radius:13px;padding:13px 18px;background:var(--ink);color:#fff;font-weight:750;cursor:pointer}.btn.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}.hero-card{min-height:310px;border-radius:28px;background:linear-gradient(135deg,#f4e8ff,#ffe8f2);display:flex;align-items:center;justify-content:center;font-size:90px}
+.section{max-width:1150px;margin:20px auto;padding:0 20px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:15px}.section h2{margin:0;font-size:28px}.muted{color:var(--muted)}
+.cats{display:flex;gap:9px;overflow:auto;padding-bottom:8px}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 15px;white-space:nowrap;cursor:pointer}.chip.active{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative}.pic{aspect-ratio:1/1;background:#f3f0ed;display:flex;align-items:center;justify-content:center;font-size:64px}.info{padding:13px}.tag{font-size:11px;color:var(--accent);font-weight:800}.name{font-weight:750;margin:4px 0}.price{font-weight:900;font-size:19px}.old{text-decoration:line-through;color:#999;font-size:13px;margin-left:5px}.buy{width:100%;margin-top:10px;padding:10px;border:0;border-radius:11px;background:var(--ink);color:#fff;font-weight:750;cursor:pointer}.heart{position:absolute;right:10px;top:10px;background:#fff;border:0;border-radius:50%;width:35px;height:35px;cursor:pointer}
+.banner{margin-top:30px;border-radius:24px;background:#191919;color:#fff;padding:30px;display:flex;justify-content:space-between;align-items:center;gap:20px}.banner h2{margin:0 0 5px}
+footer{margin-top:55px;border-top:1px solid var(--line);padding:35px 20px}.foot{max-width:1150px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}.foot h3{margin-top:0}.foot a{display:block;color:var(--muted);margin:8px 0;font-size:14px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:30;padding:18px;align-items:center;justify-content:center}.modal.show{display:flex}.box{background:#fff;border-radius:22px;max-width:520px;width:100%;max-height:92vh;overflow:auto;padding:22px}.close{float:right;border:0;background:#f2f2f2;border-radius:50%;width:34px;height:34px;cursor:pointer}
+input,textarea,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:11px;margin:6px 0 12px;font:inherit}label{font-size:13px;font-weight:700}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cartline{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0}.notice{background:#f8f5ff;border-radius:13px;padding:12px;font-size:13px;color:#51456e}
+.empty{text-align:center;padding:35px;color:var(--muted)}
+@media(max-width:800px){nav{display:none}.hero{grid-template-columns:1fr;padding-top:10px}.hero-card{min-height:220px}.grid{grid-template-columns:repeat(2,1fr)}.foot{grid-template-columns:1fr 1fr}.banner{display:block}.banner .btn{margin-top:15px}}
+@media(max-width:480px){.grid{gap:9px}.info{padding:10px}.hero{padding-left:14px;padding-right:14px}.section{padding:0 14px}.nav{padding:13px 14px}}
+</style>
+</head>
+<body>
+<div class="top">✨ Free shipping on selected products • Easy WhatsApp support</div>
+<header><div class="nav">
+<a class="brand" href="#">Meenu <span>Finds</span></a>
+<nav><a href="#shop">Shop</a><a href="#categories">Categories</a><a href="#contact">Contact</a></nav>
+<div class="actions"><button class="icon" onclick="openSearch()">⌕</button><button class="icon" onclick="openCart()">🛒 <b id="cartCount">0</b></button></div>
+</div></header>
+
+<main>
+<section class="hero">
+<div><div class="tag">CURATED FOR EVERYDAY LIFE</div><h1>Little finds.<br><span style="color:var(--accent)">Big delight.</span></h1>
+<p>Discover useful, stylish and affordable products selected for your everyday needs.</p>
+<a class="btn" href="#shop">Shop now →</a> <button class="btn alt" onclick="openWhatsApp('Hi! I have a question about Meenu Finds.')">WhatsApp us</button></div>
+<div class="hero-card">🛍️✨</div>
+</section>
+
+<section class="section" id="categories">
+<div class="section-head"><div><h2>Shop by category</h2><div class="muted">Find your next favourite</div></div></div>
+<div class="cats" id="chips"></div>
+</section>
+
+<section class="section" id="shop">
+<div class="section-head"><div><h2>Featured finds</h2><div class="muted" id="resultText"></div></div><select id="sort" onchange="render()"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></div>
+<div class="grid" id="products"></div>
+<div class="banner"><div><h2>Need help choosing?</h2><div style="opacity:.75">Message us and we'll help you pick the right product.</div></div><button class="btn" onclick="openWhatsApp('Hi Meenu Finds! Please help me choose a product.')">Chat on WhatsApp</button></div>
+</section>
+</main>
+
+<footer id="contact"><div class="foot">
+<div><h3>Meenu Finds</h3><p class="muted">Affordable everyday finds, curated with care.</p></div>
+<div><h3>Quick links</h3><a href="#shop">Shop</a><a href="#categories">Categories</a><a href="#" onclick="openCart();return false">Cart</a></div>
+<div><h3>Contact</h3><a href="#" onclick="openWhatsApp('Hi Meenu Finds!');return false">WhatsApp</a><a href="mailto:hello@meenufinds.example">Email</a></div>
+</div></footer>
+
+<div class="modal" id="modal"><div class="box" id="modalBox"></div></div>
+
+<script>
+const WHATSAPP="919999999999"; // CHANGE THIS to your WhatsApp number, country code + number, no +
+const products=[
+{id:1,name:"Jewellery Organizer Box",cat:"Jewellery",price:299,old:399,emoji:"💍",desc:"Compact storage for rings, earrings and small accessories."},
+{id:2,name:"Hair Accessories Organizer",cat:"Beauty",price:199,old:299,emoji:"🎀",desc:"A neat hanging solution for clips, bands and accessories."},
+{id:3,name:"36-Grid Storage Box",cat:"Home",price:299,old:449,emoji:"🧰",desc:"Organize beads, jewellery, craft items and tiny essentials."},
+{id:4,name:"Mini Makeup Organizer",cat:"Beauty",price:349,old:499,emoji:"💄",desc:"Keep everyday makeup and cosmetics tidy and accessible."},
+{id:5,name:"Drawer Organizer Set",cat:"Home",price:399,old:599,emoji:"🗄️",desc:"Simple compartments for a cleaner, more organized drawer."},
+{id:6,name:"Kitchen Tissue Holder",cat:"Kitchen",price:249,old:349,emoji:"🍽️",desc:"A practical holder for everyday kitchen use."},
+{id:7,name:"Rotating Jewellery Box",cat:"Jewellery",price:499,old:699,emoji:"✨",desc:"Multi-section organizer with an easy-access design."},
+{id:8,name:"Cable & Gadget Organizer",cat:"Tech",price:199,old:299,emoji:"🔌",desc:"Keep charging cables and small gadgets together."}
+];
+let selectedCat="All", cart=JSON.parse(localStorage.getItem("mf_cart")||"[]");
+function money(n){return "₹"+n.toLocaleString("en-IN")}
+function renderChips(){let cats=["All",...new Set(products.map(p=>p.cat))];document.getElementById("chips").innerHTML=cats.map(c=>`<button class="chip ${c===selectedCat?'active':''}" onclick="selectedCat='${c}';renderChips();render()">${c}</button>`).join("")}
+function render(){
+ let arr=products.filter(p=>selectedCat==="All"||p.cat===selectedCat);let s=document.getElementById("sort").value;
+ if(s==="low")arr.sort((a,b)=>a.price-b.price); if(s==="high")arr.sort((a,b)=>b.price-a.price);
+ document.getElementById("resultText").textContent=`${arr.length} products`;
+ document.getElementById("products").innerHTML=arr.map(p=>`<article class="card"><button class="heart" onclick="alert('Wishlist coming soon ❤️')">♡</button><div class="pic">${p.emoji}</div><div class="info"><div class="tag">${p.cat.toUpperCase()}</div><div class="name">${p.name}</div><div><span class="price">${money(p.price)}</span><span class="old">${money(p.old)}</span></div><button class="buy" onclick="addToCart(${p.id})">Add to cart</button></div></article>`).join("");
+ updateCount();
+}
+function addToCart(id){let x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();openCart()}
+function save(){localStorage.setItem("mf_cart",JSON.stringify(cart));updateCount()}
+function updateCount(){document.getElementById("cartCount").textContent=cart.reduce((a,b)=>a+b.qty,0)}
+function openCart(){
+ let total=cart.reduce((sum,i)=>{let p=products.find(x=>x.id===i.id);return sum+p.price*i.qty},0);
+ document.getElementById("modalBox").innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>Your cart</h2>`+
+ (cart.length?cart.map(i=>{let p=products.find(x=>x.id===i.id);return `<div class="cartline"><div>${p.emoji} ${p.name}<br><small>${money(p.price)} × ${i.qty}</small></div><button class="icon" onclick="removeItem(${p.id})">Remove</button></div>`}).join(""):`<div class="empty">Your cart is empty.</div>`)+
+ (cart.length?`<h3 style="text-align:right">Total: ${money(total)}</h3><button class="btn" style="width:100%" onclick="checkout()">Proceed to order</button>`:"");
+ document.getElementById("modal").classList.add("show")
+}
+function removeItem(id){cart=cart.filter(i=>i.id!==id);save();openCart()}
+function checkout(){
+ if(!cart.length)return;
+ document.getElementById("modalBox").innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>Place your order</h2><div class="notice">For a ₹0-start store, you can initially confirm orders through WhatsApp/UPI. Do not promise hidden supplier pricing unless your fulfillment method supports it.</div>
+ <form onsubmit="submitOrder(event)"><div class="row"><div><label>Name</label><input id="name" required></div><div><label>Phone</label><input id="phone" required></div></div>
+ <label>Full delivery address</label><textarea id="address" rows="3" required></textarea><div class="row"><div><label>PIN code</label><input id="pin" inputmode="numeric" required></div><div><label>Payment</label><select id="pay"><option>UPI / Prepaid</option><option>Cash on Delivery (if available)</option></select></div></div>
+ <button class="btn" style="width:100%">Send order on WhatsApp</button></form>`
+}
+function submitOrder(e){e.preventDefault();let lines=cart.map(i=>{let p=products.find(x=>x.id===i.id);return `${p.name} × ${i.qty} — ${money(p.price*i.qty)}`}).join("%0A");let total=cart.reduce((s,i)=>s+products.find(p=>p.id===i.id).price*i.qty,0);let msg=`Hi Meenu Finds! I'd like to place an order.%0A%0A${lines}%0A%0ATotal: ${money(total)}%0AName: ${encodeURIComponent(document.getElementById("name").value)}%0APhone: ${encodeURIComponent(document.getElementById("phone").value)}%0AAddress: ${encodeURIComponent(document.getElementById("address").value)}%0APIN: ${encodeURIComponent(document.getElementById("pin").value)}%0APayment: ${encodeURIComponent(document.getElementById("pay").value)}`;window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank")}
+function openSearch(){document.getElementById("modalBox").innerHTML=`<button class="close" onclick="closeModal()">×</button><h2>Search products</h2><input id="q" placeholder="Try jewellery, organizer..." oninput="searchNow()" autofocus><div id="searchResults"></div>`;document.getElementById("modal").classList.add("show")}
+function searchNow(){let q=document.getElementById("q").value.toLowerCase();let a=products.filter(p=>(p.name+" "+p.cat).toLowerCase().includes(q));document.getElementById("searchResults").innerHTML=a.map(p=>`<div class="cartline"><span>${p.emoji} ${p.name}</span><b>${money(p.price)}</b></div>`).join("")||`<div class="empty">No products found.</div>`}
+function openWhatsApp(text){window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`,"_blank")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+renderChips();render();
+</script>
+</body>
+</html>
